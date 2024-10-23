@@ -43,3 +43,16 @@ import("sys")$executable
 
 # Create a Python environment with all RGEE dependencies
 ee_install()
+
+# ERROR when I run ee_install()
+# rgee::ee_install want to store the environment variables: EARTHENGINE_PYTHON 
+# and EARTHENGINE_ENV in your .Renviron file to use the Python path:
+#   C:\Users\echristo\AppData\Local\Continuum\Anaconda3\envs\rgee/python.exe in future sessions.
+# Would you like to continues? [Y/n]:Y
+# Error in ee_clean_pyenv(home) : 
+#   The directory C:\Users\${USERNAME} does not exist!
+#   In addition: Warning message:
+#   In file.create(renv) :
+#   cannot create file 'C:\Users\${USERNAME}/.Renviron', reason 'No such file or directory'
+
+
