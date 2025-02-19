@@ -1,0 +1,17 @@
+01a extract temperature data
+01b import temperature data
+02a map urban areas to admin boundaries
+02b import mapped urban areas
+03a map urban areas to nearest urban agglo
+03b import mapped urban agglos
+04a extract population by urban area
+04b import population by urban area
+05 prepare analysis file
+
+10 prepare analysis file
+11 run analysis
+12 mapping
+
+20 prepare analysis file
+21 run analysis
+22 mapping
