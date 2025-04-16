@@ -7,4 +7,6 @@ Files are named according to the following structure:
 - Files starting with "1" are specific to the all-cause mortality case study
 - Files starting with "2" are specific to the preterm births case study
 
+All code is saved as R script files (.r). All data files are saved as R data files (.r).
+
 Please contact Evan Christo (echristo@mathematica-mpr.com) with any questions.
