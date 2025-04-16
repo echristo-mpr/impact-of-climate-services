@@ -1,0 +1,26 @@
+{
+    "id": "FBAE31D8",
+    "path": "C:/Users/echristo/GitHub repos/impact-of-climate-services/Final programs/08b import extreme heat days by urban area.R",
+    "project_path": "Final programs/08b import extreme heat days by urban area.R",
+    "type": "r_source",
+    "hash": "4269050409",
+    "contents": "",
+    "dirty": false,
+    "created": 1743187548134.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "33,108",
+        "scrollLine": "7"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1742324219,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1742324219,
+    "read_only": false,
+    "read_only_alternatives": []
+}
