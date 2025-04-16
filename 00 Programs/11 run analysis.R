@@ -67,10 +67,14 @@
     across(where(is.numeric), round, 2),
     years = paste0(year_min, "-", year_max)
   ) %>% ungroup() %>% mutate(
-    main_v1_np = 100 * main_v1 / pop,
-    main_v1_nm = 100 * main_v1 / mor,
-    main_v4_np = 100 * main_v4 / pop,
-    main_v4_nm = 100 * main_v4 / mor
+    main_v1_np = 1000 * main_v1 / pop,
+    main_v1_nm = 1000 * main_v1 / mor,
+    main_v2_np = 1000 * main_v2 / pop,
+    main_v2_nm = 1000 * main_v2 / mor,
+    main_v3_np = 1000 * main_v3 / pop,
+    main_v3_nm = 1000 * main_v3 / mor,
+    main_v4_np = 1000 * main_v4 / pop,
+    main_v4_nm = 1000 * main_v4 / mor
   ) %>% group_by(id, adm2, adm1) %>% summarise(
     main_v1 = sum(main_v1),
     main_v2 = sum(main_v2),
@@ -81,6 +85,10 @@
     mor = mean(mor),
     main_v1_np = mean(main_v1_np),
     main_v1_nm = mean(main_v1_nm),
+    main_v2_np = mean(main_v2_np),
+    main_v2_nm = mean(main_v2_nm),
+    main_v3_np = mean(main_v3_np),
+    main_v3_nm = mean(main_v3_nm),
     main_v4_np = mean(main_v4_np),
     main_v4_nm = mean(main_v4_nm)
   ) %>% ungroup()
@@ -97,10 +105,14 @@
   ) %>% ungroup() %>% mutate(
     across(where(is.numeric), round, 2),
     years = paste0(year_min, "-", year_max),
-    main_v1_np = 100 * main_v1 / pop,
-    main_v1_nm = 100 * main_v1 / mor,
-    main_v4_np = 100 * main_v4 / pop,
-    main_v4_nm = 100 * main_v4 / mor
+    main_v1_np = 1000 * main_v1 / pop,
+    main_v1_nm = 1000 * main_v1 / mor,
+    main_v2_np = 1000 * main_v2 / pop,
+    main_v2_nm = 1000 * main_v2 / mor,
+    main_v3_np = 1000 * main_v3 / pop,
+    main_v3_nm = 1000 * main_v3 / mor,
+    main_v4_np = 1000 * main_v4 / pop,
+    main_v4_nm = 1000 * main_v4 / mor
   )
   
   # Roll-up to ADM1 level
@@ -115,10 +127,14 @@
   )  %>% mutate(
     across(where(is.numeric), round, 2),
     years = paste0(year_min, "-", year_max),
-    main_v1_np = 100 * main_v1 / pop,
-    main_v1_nm = 100 * main_v1 / mor,
-    main_v4_np = 100 * main_v4 / pop,
-    main_v4_nm = 100 * main_v4 / mor
+    main_v1_np = 1000 * main_v1 / pop,
+    main_v1_nm = 1000 * main_v1 / mor,
+    main_v2_np = 1000 * main_v2 / pop,
+    main_v2_nm = 1000 * main_v2 / mor,
+    main_v3_np = 1000 * main_v3 / pop,
+    main_v3_nm = 1000 * main_v3 / mor,
+    main_v4_np = 1000 * main_v4 / pop,
+    main_v4_nm = 1000 * main_v4 / mor
   )
     
   # Roll-up to ADM0 level

@@ -18,6 +18,7 @@
   library(purrr)
   library(readxl)
   library(zoo)
+  library(labelled)
   
   # Clear environment
   rm(list = ls())
@@ -143,7 +144,9 @@
 #### TEMPERATURE and TEMP-HEALTH RISK RATIO #### 
   
   # Import means by urban area
-  means <- readRDS("02 intermediate/07 mean temp by urban area data.r") %>%
+  means <- readRDS("02 intermediate/07 hist and proj temp by urban area data.r") %>%
+    select(id, hist_15_24) %>%
+    rename(mean = hist_15_24) %>%
     mutate(
       mean = round(mean, 0), # Round to nearest integer
       mean = case_when(
@@ -174,7 +177,7 @@
   # Add intervention effectiveness
   df <- df %>% mutate(
     ih = 1.18,
-    ih_lb = 1.07,
+    ih_lb = 1.00, # 1.07,
     ih_ub = 1.30
   )
   
@@ -206,6 +209,38 @@
   df <- df %>%
     mutate(adm0 = "India") %>%
     relocate(id, year, adm0, adm1, adm2, population)
+  
+  # Label
+  df <- df %>% set_variable_labels(
+    id = "Urban area ID",
+    year = "Year",
+    adm0 = "Administrative boundary 0 - country",
+    adm1 = "Adminsitrative boundary 1 - state",
+    adm2 = "Adminsitrative boundary 2 - district",
+    population = "Population of the urban area",
+    br = "Annual births per 1,000 people",
+    births_yearly = "Annual births",
+    births_daily = "Daily births",
+    per_preterm = "Percentage of births that are preterm",
+    per_preterm_lb = "Percentage of births that are preterm (lower bound)",
+    per_preterm_ub = "Percentage of births that are preterm (upper bound)",
+    births_preterm_daily = "Daily preterm births",
+    births_preterm_daily_lb = "Daily preterm births (lower bound)",
+    births_preterm_daily_ub = "Daily preterm births (upper bound)",
+    mean = "Observed mean temperature of the urban area from 2015-2024 rounded to the nearest integer",
+    mean_temp_lb = "Lower bound of mean temperature interval for heat-preterm birth exposure-response ratios",
+    mean_temp_ub = "Upper bound of mean temperature interval for heat-preterm birth exposure-response ratios",
+    ssp245 = "The number of days within the mean and max temperature intervals for the given year",
+    th = "The exposure-response ratio of heat on preterm births",
+    th_lb = "The exposure-response ratio of heat on preterm births (lower bound)",
+    th_ub = "The exposure-response ratio of heat on preterm births (upper bound)",
+    ih = "The change in Atosiban distribution effectiveness based on temperature",
+    ih_lb = "The change in Atosiban distribution effectiveness based on temperature (lower bound)",
+    ih_ub = "The change in Atosiban distribution effectiveness based on temperature (upper bound)",
+    cs_main = "The percent improvement in effectiveness of Atosiban distribution when complimented by a HHWS",
+    cs_low = "The percent improvement in effectiveness of Atosiban distribution when complimented by a HHWS (lower bound)",
+    cs_high = "The percent improvement in effectiveness of Atosiban distribution when complimented by a HHWS (upper bound)",
+  )
   
   # Save
   saveRDS(df, file = "02 intermediate/20 analysis file.r")

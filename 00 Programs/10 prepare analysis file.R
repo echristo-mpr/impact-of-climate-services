@@ -16,7 +16,8 @@
   library(gargle)
   library(tidyverse)
   library(purrr)
-  
+  library(labelled)
+
   # Clear environment
   rm(list = ls())
   
@@ -170,10 +171,10 @@
                         max_temp_lb == 41 ~ 0.62,
                         max_temp_lb == 43 ~ 0.60,
                         max_temp_lb == 45 ~ 0.29),
-    ih_rrlb = case_when(max_temp_lb == 40 ~ 1.22,
-                        max_temp_lb == 41 ~ 1.34,
-                        max_temp_lb == 43 ~ 1.35,
-                        max_temp_lb == 45 ~ 1.81)
+    ih_rrlb = case_when(max_temp_lb == 40 ~ 1.00, # 1.22,
+                        max_temp_lb == 41 ~ 1.00, # 1.34,
+                        max_temp_lb == 43 ~ 1.00, # 1.35,
+                        max_temp_lb == 45 ~ 1.00) # 1.81)
   )
   
   # Replace NAs with 1s
@@ -212,6 +213,33 @@
   df <- df %>%
     mutate(adm0 = "India") %>%
     relocate(id, year, adm0, adm1, adm2, population)
+  
+  # Label
+  df <- df %>% set_variable_labels(
+    id = "Urban area ID",
+    year = "Year",
+    adm0 = "Administrative boundary 0 - country",
+    adm1 = "Adminsitrative boundary 1 - state",
+    adm2 = "Adminsitrative boundary 2 - district",
+    population = "Population of the urban area",
+    crudeDeathRate = "Annual crude death rate per 1,000 people",
+    ho_yearly = "Annual adverse health outcome (HO)",
+    ho_daily = "Daily adverse health outcome (HO)",
+    mean_temp_lb = "Lower bound of mean temperature interval for heat-mortality exposure-response ratios",
+    mean_temp_ub = "Upper bound of mean temperature interval for heat-mortality exposure-response ratios",
+    max_temp_lb = "Lower bound of max temperature interval for the change in HAP effectiveness based on temperature",
+    max_temp_ub = "Upper bound of max temperature interval for the change in HAP effectiveness based on temperature",
+    ssp245 = "The number of days within the mean and max temperature intervals for the given year",
+    th_rr = "The exposure-response ratio of heat on mortality",
+    th_rrlb = "The exposure-response ratio of heat on mortality (lower bound)",
+    th_rrub = "The exposure-response ratio of heat on mortality (upper bound)",
+    ih_rr = "The change in HAP effectiveness based on temperature",
+    ih_rrlb = "The change in HAP effectiveness based on temperature (lower bound)",
+    ih_rrub = "The change in HAP effectiveness based on temperature (upper bound)",
+    cs_main = "The percent improvement in effectiveness of a HAP when complimented by a HAP",
+    cs_low = "The percent improvement in effectiveness of a HAP when complimented by a HAP (lower bound)",
+    cs_high = "The percent improvement in effectiveness of a HAP when complimented by a HAP (upper bound)",
+  )
   
   # Save
   saveRDS(df, file = "02 intermediate/10 analysis file.r")

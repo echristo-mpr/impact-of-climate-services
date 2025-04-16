@@ -34,16 +34,30 @@
   setwd("N:/Project/51910_Rockefeller_PPH_Initiative/DC1/Impact estimate calculator MANUSCRIPT/Programming")
 
 #### IMPORT AND CLEAN ####
-  
+
   # Get objects (SSP245)
-  objects <- gcs_list_objects(bucket = "ee-51910", prefix = "07 mean")
+  objects <- gcs_list_objects(bucket = "ee-51910", prefix = "08 hist and proj days between")
   files <- objects$name
   means <- files %>% 
     lapply(gcs_get_object) %>% # Import files from cloud storage
     bind_rows %>% # Bind files by row
     arrange(id)
-  
+
 #### SAVE ####
 
   # Save to .r file
-  saveRDS(means, file = "02 intermediate/07 mean temp by urban area data.r")
+  saveRDS(means, file = "02 intermediate/08 hist and proj days by temperature by urban area data.r")
+  
+  # Days above 31
+  above31 <- means %>% filter(lb >= 31) %>% 
+    group_by(id) %>%
+    reframe(
+      daysabove31_hist_15_24 = sum(hist_15_24),
+      daysabove31_proj_15_24 = sum(proj_15_24),
+      daysabove31_proj_25_35 = sum(proj_25_35)
+    ) %>%
+    ungroup()
+  
+  # Save
+  saveRDS(above31, file = "02 intermediate/08 hist and proj days above 31 by urban area data.r")
+  
