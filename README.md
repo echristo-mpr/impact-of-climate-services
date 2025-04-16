@@ -1,4 +1,4 @@
-# impact-of-climate-services
+# The Role of Climate Services for Health
 
 This repository houses the code and analysis files for the working paper: The Role of Climate Services for Health: Theoretical Case Studies on Heat-Health Warning Systems in India (2025). 
 
